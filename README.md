@@ -1,1 +1,2 @@
-# easy-store-advance-web-project
+# Advance Web Application
+## Easy Store
