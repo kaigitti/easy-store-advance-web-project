@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "easy-store-project": {
+    "easy-store-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/easy-store-project",
+            "outputPath": "dist/easy-store-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,12 +25,13 @@
             ],
             "styles": [
               "src/styles.css",
+              "node_modules/font-awesome/css/font-awesome.css"
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              ""
             ]
           },
           "configurations": {
@@ -67,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "easy-store-project:build"
+            "browserTarget": "easy-store-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "easy-store-project:build:production"
+              "browserTarget": "easy-store-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "easy-store-project:build"
+            "browserTarget": "easy-store-app:build"
           }
         },
         "test": {
@@ -115,19 +116,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "easy-store-project:serve"
+            "devServerTarget": "easy-store-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "easy-store-project:serve:production"
+              "devServerTarget": "easy-store-app:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "easy-store-project",
+  "defaultProject": "easy-store-app",
   "cli": {
-    "analytics": "413d9470-be0a-480e-99c4-a97b2b989649"
+    "analytics": "4bf3ed52-b259-4b03-b68b-685b69507386"
   }
 }
