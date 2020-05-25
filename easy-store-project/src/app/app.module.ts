@@ -6,10 +6,13 @@ import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { environment } from '../environments/environment'
 
 import { AppComponent } from './app.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
+import { ShowItemsService } from './services/show-items.service';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -17,7 +20,7 @@ import { AppComponent } from './app.component';
     AngularFireModule.initializeApp(environment.firebase, 'easy-store-app'),
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [ShowItemsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
