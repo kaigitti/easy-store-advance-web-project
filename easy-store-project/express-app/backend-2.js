@@ -11,7 +11,7 @@ const config = {
     useFindAndModify: false
 };
 
-expressApp.use ((req, res, next) => {
+expressApp.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
     res.setHeader('Access-Control-Allow-Methods', 'POST, PUSH, GET, PATCH, DELETE, OPTIONS')
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Option, Authorization')
@@ -19,76 +19,61 @@ expressApp.use ((req, res, next) => {
 });
 
 mongoose.connect(url, config)
-.then(() => {
-    console.log('Connection Success...');
-})
-.catch(err => {
-    res.send('Connection Failed...!!');
-})
+    .then(() => {
+        console.log('Connection Success...');
+    })
+    .catch(err => {
+        res.send('Connection Failed...!!');
+    })
 
-var storeSchema = new mongoose.Schema({
-    p_id: String,
-    p_name: String,
-    p_detail: String,
-    p_quantity: Number,
-    p_price: Number 
-},{
-    collection: 'products'
+var addressSchema = new mongoose.Schema({
+    id: String,
+    name_surname: String,
+    tel: Number,
+    province: String,
+    district: String,
+    sub_district: String,
+    postcode: Number,
+    other: String
+}, {
+    collection: 'address'
 });
 
-let Product = mongoose.model('products',storeSchema);
+let Address = mongoose.model('address', addressSchema);
 
-expressApp.get('/getItems',(req,res) => {
-    Product.find({},(err,data) => {
-        if(err){
-            console.log('No Items Available Or Error : '+err);
-        }else{
-            console.log('All Items Here!!')
-            // console.log(result)
+expressApp.get('/showAddress', (req, res) => {
+    Address.find({}, (err, data) => {
+        if (err) {
+            console.log('No Address Available Or Error : ' + err);
+        } else {
+            console.log('All Address Here!!')
             res.status(200).send(data);
         }
     })
 })
 
-expressApp.post('/addItems',(req,res) => {
-    Product.insertMany(req.body)
-    .then(result => {
-        console.log('Add Items Success!!')
-        console.log(result);
-        res.status(200).json(result);
-    })
-    .catch(err => {
-        console.log('Add Items Failed : '+err)
-        // console.log(err);
-    })
+
+expressApp.post('/addAddress', (req, res) => {
+    Address.insertMany(req.body)
+        .then(result => {
+            console.log('Add address Success!!')
+            console.log(result);
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            console.log('Add address Failed : ' + err)
+            console.log(err);
+        })
 })
 
-expressApp.put('/updateItems/:_id',(req,res) => {
-    Product.findByIdAndUpdate(req.params._id, req.body, (err,data) => {
-        if(err){
-            console.log('Update Items Failed : '+err);
-            // res.send(err);
-        }else{
-            console.log('Update Items Success!!');
-            console.log(result)
-            res.end();
-        }
-    });
-});
+expressApp.delete('/deleteAddress/:id',async (req, res) => {
+    const { id } = req.params
 
-expressApp.delete('/deleteItems/:_id',(req,res) => {
-    Product.findByIdAndDelete(req.params._id, (err,data) => {
-        if(err){
-            console.log('Update Items Failed : '+err);
-            // res.send(err);
-        }else{
-            console.log('Delete Items Success!!');
-            console.log(result)
-            res.end();
-        }
-    });
-});
+    await Address.findByIdAndDelete(id)
+    res.status(204).end()
+    })
 
-expressApp.listen(3000, function(){
+
+expressApp.listen(3000, function () {
     console.log('Listening on port: 3000');
 });
