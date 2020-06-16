@@ -6,7 +6,7 @@
         <ul class="list-group list-group-flush" *ngFor="let item of address">
             <li class="list-group-item">ชื่อ: {{item.name_surname}} เบอร์โทร: {{item.tel}} ที่อยู่: {{item.other}}
                 จังหวัด{{item.province}} เขต/อำเภอ{{item.district}} แขวง/ตำบล{{item.sub_district}} {{item.postcode}}
-                <button type="button" class="btn btn-danger btn-sm float-right" (click)="deleteAddress(item.id)">เปลี่ยนแปลงที่อยู่</button>
+                <button type="button" class="btn btn-danger btn-sm float-right" >เปลี่ยนแปลงที่อยู่</button>
             </li>
         </ul>
     </div>
